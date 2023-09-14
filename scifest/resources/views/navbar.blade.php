@@ -145,7 +145,7 @@
   <aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color: #0B2447">
     <!-- Brand Logo -->
     <a href="dashboard" class="brand-link" style="text-align: center">
-      <span class="brand-text font-weight-bold" style="font-size: 2rem">SCI Kemitraan</span>
+      <span class="brand-text font-weight-bold" style="font-size: 2rem">SCI ABSENSI</span>
     </a>
 
     <!-- Sidebar -->
@@ -156,7 +156,7 @@
           <img src="{{url('adminlte/dist/img/Sucofindo_Utama-.png')}}" alt="User Image">
         </div>
         <div class="info">
-          <a href="/dashboard" class="d-block">SCI Kemitraan</a>
+          <a href="/dashboard" class="d-block">SCI ABSENSI</a>
         </div>
       </div>
 
@@ -177,15 +177,15 @@
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-clipboard-list"></i>
               <p>
-                Laporan
+                History
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="/verifikasiAnggota" class="nav-link @if($nama_route == 'verifikasiAnggota') active @endif">
+                <a href="/track" class="nav-link @if($nama_route == 'track') active @endif">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>F.04 Verifikasi Profil</p>
+                  <p>Track Karyawan</p>
                 </a>
               </li>
           </li>

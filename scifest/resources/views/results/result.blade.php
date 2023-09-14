@@ -45,7 +45,7 @@
 							<!-- Add the bg color to the header using any of the bg-* classes -->
 							<div class="widget-user-header bg-info">
 							  <h3 class="widget-user-username">Alexander Pierce</h3>
-							  <h5 class="widget-user-desc">Founder & CEO</h5>
+							  <h5 class="widget-user-desc">123456789</h5>
 							</div>
 							<div class="widget-user-image">
 							  <img class="img-circle elevation-2" src="../dist/img/user1-128x128.jpg" alt="User Avatar">
@@ -53,25 +53,33 @@
 							<div class="card-footer">
 							  <div class="row">
 								<div class="col-sm-4 border-right">
+									<div class="description-block">
+										<div class="widget-user-image">
+											<img src="{{ Storage::disk('image')->get($file->gambar) }}" style="height: 50px;width:100px;">
+										</div>
+									</div>
+									<!-- /.description-block -->
+								  </div>
+								<div class="col-sm-4 border-right">
 								  <div class="description-block">
-									<h5 class="description-header">3,200</h5>
-									<span class="description-text">SALES</span>
+									<h5 class="description-header">36 C</h5>
+									<span class="description-text">BODY TEMPERATURE</span>
 								  </div>
 								  <!-- /.description-block -->
 								</div>
 								<!-- /.col -->
 								<div class="col-sm-4 border-right">
 								  <div class="description-block">
-									<h5 class="description-header">13,000</h5>
-									<span class="description-text">FOLLOWERS</span>
+									<h5 class="description-header">180</h5>
+									<span class="description-text">HEARTH RATE</span>
 								  </div>
 								  <!-- /.description-block -->
 								</div>
 								<!-- /.col -->
 								<div class="col-sm-4">
 								  <div class="description-block">
-									<h5 class="description-header">35</h5>
-									<span class="description-text">PRODUCTS</span>
+									<h5 class="description-header">HAPPY - 80%</h5>
+									<span class="description-text">EXPRESSION</span>
 								  </div>
 								  <!-- /.description-block -->
 								</div>

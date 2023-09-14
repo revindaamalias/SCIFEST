@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
     
 use Illuminate\Http\Request;
 use Storage;
+use DB;
   
 class WebcamController extends Controller
 {
@@ -26,7 +27,7 @@ class WebcamController extends Controller
     {
         // dd($request);
         $img = $request->image;
-        $folderPath = "uploads/";
+        $folderPath = "img/";
         
         $image_parts = explode(";base64,", $img);
         $image_type_aux = explode("image/", $image_parts[0]);
@@ -37,6 +38,12 @@ class WebcamController extends Controller
         
         $file = $folderPath . $fileName;
         Storage::put($file, $image_base64);
+        DB::connection('mysql_scikemitraan')->table('tb_foto')->insert([
+            'gambar' => $file,
+            'name' => date("d F Y").$fileName,
+            'created_at' => date("Y-m-d h:i:s")
+
+        ]);
         
         return redirect()->to('/result')->with(['message'=>'Image saved successfully']);
     }

@@ -6,8 +6,8 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PhpDocXController;
 use App\Http\Controllers\PhpSpreadSheetController;
-use App\Http\Controllers\LaporanCtrl;
-use App\Http\Controllers\ViewDataController;
+use App\Http\Controllers\ImageController;
+use App\Http\Controllers\TrackController;
 use App\Http\Controllers\ResultController;
 use App\Http\Controllers\WebcamController;
 
@@ -33,6 +33,8 @@ Route::get('logout', [LoginController::class, 'logout']);
 // Route::get('dashboard','App\Http\Controllers\DashboardController@index');
 Route::get('dashboard', [DashboardController::class, 'index']);
 Route::get('result', [ResultController::class, 'index']);
+Route::get('track', [TrackController::class, 'track']);
+Route::get('image/{filename}', [ImageController::class, 'displayImage'])->name('image.displayImage');
 
 Route::get('webcam', [WebcamController::class, 'index']);
 Route::post('webcam/store', [WebcamController::class, 'store']);
