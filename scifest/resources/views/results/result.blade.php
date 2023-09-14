@@ -52,15 +52,21 @@
 							</div>
 							<div class="card-footer">
 							  <div class="row">
-								<div class="col-sm-4 border-right">
+								<div class="col-sm-3 border-right">
 									<div class="description-block">
 										<div class="widget-user-image">
-											<img src="{{ Storage::disk('image')->get($file->gambar) }}" style="height: 50px;width:100px;">
+                                            @if ($file != 'null')
+                                                <?php $gambar = explode("/",$file->gambar)
+                                                ?>
+                                                <img src="{{asset('storage/img/'.$gambar[1])}}" style="height: 50px;width:100px;">
+                                            @else
+                                                <i>Gambar Tidak Ada</i>
+                                            @endif
 										</div>
 									</div>
 									<!-- /.description-block -->
-								  </div>
-								<div class="col-sm-4 border-right">
+								</div>
+								<div class="col-sm-3 border-right">
 								  <div class="description-block">
 									<h5 class="description-header">36 C</h5>
 									<span class="description-text">BODY TEMPERATURE</span>
@@ -68,7 +74,7 @@
 								  <!-- /.description-block -->
 								</div>
 								<!-- /.col -->
-								<div class="col-sm-4 border-right">
+								<div class="col-sm-3 border-right">
 								  <div class="description-block">
 									<h5 class="description-header">180</h5>
 									<span class="description-text">HEARTH RATE</span>
@@ -76,7 +82,7 @@
 								  <!-- /.description-block -->
 								</div>
 								<!-- /.col -->
-								<div class="col-sm-4">
+								<div class="col-sm-3">
 								  <div class="description-block">
 									<h5 class="description-header">HAPPY - 80%</h5>
 									<span class="description-text">EXPRESSION</span>
