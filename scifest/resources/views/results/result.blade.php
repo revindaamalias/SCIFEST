@@ -54,14 +54,14 @@
 							  <div class="row">
 								<div class="col-sm-3 border-right">
 									<div class="description-block">
-										<div class="widget-user-image">
-                                            @if ($file != 'null')
-                                                <?php $gambar = explode("/",$file->gambar)
-                                                ?>
-                                                <img src="{{asset('storage/img/'.$gambar[1])}}" style="height: 50px;width:100px;">
-                                            @else
-                                                <i>Gambar Tidak Ada</i>
-                                            @endif
+										@if ($file != 'null')
+											<?php $gambar = explode("/",$file->gambar)?>
+											<img src="{{asset('storage/img/'.$gambar[1])}}" style="height: 50px;width:100px;">
+										@else
+											<i>Gambar Tidak Ada</i>
+										@endif
+										<div class="description-block">
+											<span class="description-text" type=date>{{ date('d-m-Y') }}</span>
 										</div>
 									</div>
 									<!-- /.description-block -->
@@ -84,8 +84,8 @@
 								<!-- /.col -->
 								<div class="col-sm-3">
 								  <div class="description-block">
-									<h5 class="description-header">HAPPY - 80%</h5>
-									<span class="description-text">EXPRESSION</span>
+									<h5 class="description-header">98</h5>
+									<span class="description-text">SpO2</span>
 								  </div>
 								  <!-- /.description-block -->
 								</div>
@@ -100,6 +100,54 @@
 						<!-- /.col -->
 					  </div>
 				</div>
+			</div>
+			{{-- track --}}
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="card card-primary">
+							<div class="card-header">
+								<h3 class="card-title">Track Record</h3>
+							</div>
+							<div class="card-body">
+		
+							<table id="example" class="table table-bordered table-striped datatable" style="width:100%">
+								<thead>
+									<tr>
+										<th>No</th>
+										<th>NIP</th>
+										<th>Nama</th>
+										<th>Absen</th>
+										<th>Track</th>
+										<th>Body Temperature</th>
+										<th>Hearth Rate</th>
+										<th>SpO2</th>
+										<th>Status</th>
+									</tr>
+								</thead>
+								<tbody>
+									@php $no = 1; @endphp
+									<tr>
+										<td>{{ $no++ }}</td>
+										<td>123456789</td>
+										<td>Alexander Pierce</td>
+										<td>Hadir</td>
+										<td>Lantai 9 - 20231309</td>
+										<td>36 C</td>
+										<td>180</td>
+										<td>98</td>
+										<td><div class="btn btn-block bg-gradient-success btn-sm"><div></td>
+									</tr>
+								</tbody>
+							</table>
+							</div>
+						</div>
+					</div>
+				</div>
+				</div>
+					<!-- /.Content -->
+				</div>
+				 <!-- /.content-wrapper -->
 			</div>
 	    </section>
 	    <!-- /.content -->
