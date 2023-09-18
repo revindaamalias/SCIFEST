@@ -42,13 +42,14 @@
 						<div class="col-md-12">
 						  <!-- Widget: user widget style 1 -->
 						  <div class="card card-widget widget-user shadow">
+							{{-- <img src="{{url('adminlte/dist/img/bg.jpg')}}" alt="User Image"> --}}
 							<!-- Add the bg color to the header using any of the bg-* classes -->
-							<div class="widget-user-header bg-info">
-							  <h3 class="widget-user-username">Alexander Pierce</h3>
-							  <h5 class="widget-user-desc">123456789</h5>
+							<div class="widget-user-header" style="background-image: url('adminlte/dist/img/bg.jpg');">
+							  <h3 class="widget-user-username" style="color:white">Alexander Pierce</h3>
+							  <h5 class="widget-user-desc" style="color:white">123456789</h5>
 							</div>
 							<div class="widget-user-image">
-							  <img class="img-circle elevation-2" src="../dist/img/user1-128x128.jpg" alt="User Avatar">
+							  <img class="img-circle elevation-2" src="{{url('adminlte/dist/img/user1-128x128.jpg')}}" alt="User Image">
 							</div>
 							<div class="card-footer">
 							  <div class="row">
@@ -56,7 +57,7 @@
 									<div class="description-block">
 										@if ($file != 'null')
 											<?php $gambar = explode("/",$file->gambar)?>
-											<img src="{{asset('storage/img/'.$gambar[1])}}" style="height: 50px;width:100px;">
+											<img  src="{{asset('storage/img/'.$gambar[1])}}" style="height: 50px;width:100px;">
 										@else
 											<i>Gambar Tidak Ada</i>
 										@endif
@@ -67,24 +68,24 @@
 									<!-- /.description-block -->
 								</div>
 								<div class="col-sm-3 border-right">
-								  <div class="description-block">
-									<h5 class="description-header">36 C</h5>
-									<span class="description-text">BODY TEMPERATURE</span>
-								  </div>
+									<div class="description-block">
+										<h1 class="description-header bi bi-thermometer-high" style="font-size:40px">36 C</h1>
+										<span class="description-text">BODY TEMPERATURE</span>
+								  	</div>
 								  <!-- /.description-block -->
 								</div>
 								<!-- /.col -->
 								<div class="col-sm-3 border-right">
 								  <div class="description-block">
-									<h5 class="description-header">180</h5>
-									<span class="description-text">HEARTH RATE</span>
+									<h5 class="description-header bi bi-heart-pulse" style="font-size:40px"> 180</h5>
+									<span class="description-text">HEART RATE</span>
 								  </div>
 								  <!-- /.description-block -->
 								</div>
 								<!-- /.col -->
 								<div class="col-sm-3">
 								  <div class="description-block">
-									<h5 class="description-header">98</h5>
+									<h5 class="description-header bi bi-clipboard2-pulse" style="font-size:40px"> 98</h5>
 									<span class="description-text">SpO2</span>
 								  </div>
 								  <!-- /.description-block -->
@@ -106,7 +107,7 @@
 				<div class="row">
 					<div class="col-md-12">
 						<div class="card card-primary">
-							<div class="card-header">
+							<div class="card-header" style="background-color: #023431">
 								<h3 class="card-title">Track Record</h3>
 							</div>
 							<div class="card-body">
