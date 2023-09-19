@@ -33,8 +33,9 @@ Route::get('logout', [LoginController::class, 'logout']);
 // Route::get('dashboard','App\Http\Controllers\DashboardController@index');
 Route::get('dashboard', [DashboardController::class, 'index']);
 Route::get('result', [ResultController::class, 'index']);
+Route::get('fetchImage', [ResultController::class, 'fetchImageIndex'])->name('loadImage');
 Route::get('track', [TrackController::class, 'track']);
 Route::get('image/{filename}', [ImageController::class, 'displayImage'])->name('image.displayImage');
 
 Route::get('webcam', [WebcamController::class, 'index']);
-Route::post('webcam/store', [WebcamController::class, 'store']);
+Route::post('webcam/store', [WebcamController::class, 'store'])->name('storeImage');

@@ -37,7 +37,7 @@
 	    <section class="content">
 			<div class="container">
 				<h1 class="text-center">ABSENSI - PT SUCOFINDO</h1>
-				 
+
 				<form method="POST" action="{{ url('webcam/store') }}">
 					@csrf
 					<div class="row">
@@ -52,7 +52,7 @@
 						</div>
 						<div class="col-md-12 text-center">
 							<br/>
-							<button class="btn btn-success">Submit</button>
+							<button class="btn btn-success" id="saveImage">Submit</button>
 						</div>
 					</div>
 				</form>
@@ -61,23 +61,53 @@
 	    <!-- /.content -->
 	</div>
 	  <!-- /.content-wrapper -->
-	  @include('footer')
-	  <script language="JavaScript">
+    @include('footer')
+	<script language="JavaScript">
 		Webcam.set({
 			width: 490,
 			height: 350,
 			image_format: 'jpeg',
 			jpeg_quality: 90
 		});
-		
+
 		Webcam.attach( '#my_camera' );
-		
+
 		function take_snapshot() {
 			Webcam.snap( function(data_uri) {
 				$(".image-tag").val(data_uri);
 				document.getElementById('results').innerHTML = '<img src="'+data_uri+'"/>';
 			} );
 		}
+
+        $('#saveImage').click(function(e)
+        {
+            e.preventDefault();
+
+            const form = new FormData();
+            var dataimage = $(".image-tag").val();
+
+            form.append('image', dataimage)
+            console.log(JSON.stringify(dataimage));
+
+            $.ajax({
+                url:"{{route('storeImage')}}",
+                type:"POST",
+                cache: false,
+                contentType: false,
+                processData: false,
+                data:form,
+                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                success:function(response)
+                {
+                    console.log(response)
+                    if(response.status == 200)
+                    {
+                        window.location.replace('result');
+                    }
+                }
+            })
+        })
+
 	</script>
 </body>
 

@@ -53,13 +53,8 @@
 							<div class="card-footer">
 							  <div class="row">
 								<div class="col-sm-3 border-right">
-									<div class="description-block">
-										@if ($file != 'null')
-											<?php $gambar = explode("/",$file->gambar)?>
-											<img src="{{asset('storage/img/'.$gambar[1])}}" style="height: 50px;width:100px;">
-										@else
-											<i>Gambar Tidak Ada</i>
-										@endif
+									<div class="description-block" id="imageBox">
+											<img src="" style="height: 50px;width:100px;" id="imageValidate">
 										<div class="description-block">
 											<span class="description-text" type=date>{{ date('d-m-Y') }}</span>
 										</div>
@@ -110,41 +105,41 @@
 								<h3 class="card-title">Track Record</h3>
 							</div>
 							<div class="card-body">
-		
-							<table id="example" class="table table-bordered table-striped datatable" style="width:100%">
-								<thead>
-									<tr>
-										<th>No</th>
-										<th>NIP</th>
-										<th>Nama</th>
-										<th>Absen</th>
-										<th>Track</th>
-										<th>Body Temperature</th>
-										<th>Hearth Rate</th>
-										<th>SpO2</th>
-										<th>Status</th>
-									</tr>
-								</thead>
-								<tbody>
-									@php $no = 1; @endphp
-									<tr>
-										<td>{{ $no++ }}</td>
-										<td>123456789</td>
-										<td>Alexander Pierce</td>
-										<td>Hadir</td>
-										<td>Lantai 9 - 20231309</td>
-										<td>36 C</td>
-										<td>180</td>
-										<td>98</td>
-										<td><div class="btn btn-block bg-gradient-success btn-sm"><div></td>
-									</tr>
-								</tbody>
-							</table>
+                                <table id="example" class="table table-bordered table-striped datatable" style="width:100%">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>NIP</th>
+                                            <th>Nama</th>
+                                            <th>Absen</th>
+                                            <th>Track</th>
+                                            <th>Body Temperature</th>
+                                            <th>Hearth Rate</th>
+                                            <th>SpO2</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @php $no = 1; @endphp
+                                        <tr>
+                                            <td>{{ $no++ }}</td>
+                                            <td>123456789</td>
+                                            <td>Alexander Pierce</td>
+                                            <td>Hadir</td>
+                                            <td>Lantai 9 - 20231309</td>
+                                            <td>36 C</td>
+                                            <td>180</td>
+                                            <td>98</td>
+                                            <td><div class="btn btn-block bg-gradient-success btn-sm"><div></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
 							</div>
 						</div>
 					</div>
 				</div>
-				</div>
+			</div>
+
 					<!-- /.Content -->
 				</div>
 				 <!-- /.content-wrapper -->
@@ -153,7 +148,34 @@
 	    <!-- /.content -->
 	</div>
 	  <!-- /.content-wrapper -->
-	  @include('footer')
+	@include('footer')
+    <script>
+        $(document).ready(function(){
+
+
+            $.ajaxSetup({
+                headers:{
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            fetchImage()
+
+            function fetchImage(){
+                $.ajax({
+                    url:"{{route('loadImage')}}",
+                    type:"GET",
+                    dataType:"json",
+                    success:function(response)
+                    {
+                        console.log(response.image.gambar);
+                        $('#imageBox').html('');
+						$('#imageBox').prepend('<img src="/storage/'+response.image.gambar+'" id="imageValidate" style="height: 50px;width:100px;">');
+                    }
+                })
+            }
+        })
+    </script>
 </body>
 
 </html>
