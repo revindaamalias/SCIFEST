@@ -131,7 +131,7 @@
                                             <td>36 C</td>
                                             <td>180</td>
                                             <td>98</td>
-                                            <td><div class="btn btn-block bg-gradient-success btn-sm"><div></td>
+                                            <td><div class="bi bi-person-fill-check bg-gradient-success btn-sm"><div></td>
                                         </tr>
                                     </tbody>
                                 </table>

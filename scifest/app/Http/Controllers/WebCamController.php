@@ -68,17 +68,20 @@ class WebcamController extends Controller
                 // $pythonShell = shell_exec(escapeshellcmd("C:/Users/hanan/Documents/Work/Sucofindo/SCIFest/FlaskWebServer/pywebserver.py"));
                 // echo $pythonShell;
                 // $process = new Process(['C:/Users/hanan/AppData/Local/Programs/Python/Python311/python.exe', 'C:/Users/hanan/Documents/Work/Sucofindo/SCIFest/FlaskWebServer/pywebserver.py']);
-                // $process= Process::fromShellCommandline('py C:/Users/hanan/Documents/Work/Sucofindo/SCIFest/FlaskWebServer/pywebserver.py');
-                // $process->run();
+                $process= Process::fromShellCommandline(['py', '/Documents/GitHub/SCIFEST/FlaskWebServer/py_newfile.py']);
+                $process->run();
 
-                // if (!$process->isSuccessful()) {
-                //     throw new ProcessFailedException($process);
-                // }
+                if (!$process->isSuccessful()) {
+                    throw new ProcessFailedException($process);
+                }
                 // $command = escapeshellcmd('C:/Users/hanan/Documents/Work/Sucofindo/SCIFest/FlaskWebServer/pywebserver.py');
                 // $output = shell_exec($command);
                 // echo $process;
 
-                $output = shell_exec('py C:/Users/hanan/Documents/Work/Sucofindo/SCIFest/FlaskWebServer/pywebserver.py');
+                // $output = exec('py C:/Users/User/Documents/GitHub/SCIFEST/FlaskWebServer/py_newfile.py');
+
+                echo $process;
+                exit();
                 return response()->json([
                     'status'=>200,
                     'message'=>'Image saved successfully'
