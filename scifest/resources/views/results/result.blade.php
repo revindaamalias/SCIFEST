@@ -171,7 +171,7 @@
                     {
                         console.log(response.image.gambar);
                         $('#imageBox').html('');
-						$('#imageBox').prepend('<img src="/storage/'+response.image.gambar+'" id="imageValidate" style="height: 50px;width:100px;">');
+						$('#imageBox').prepend('<img src="/storage/'+response.image.gambar+'" id="imageValidate">');
                     }
                 })
             }

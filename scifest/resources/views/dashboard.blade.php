@@ -87,8 +87,6 @@
             var dataimage = $(".image-tag").val();
 
             form.append('image', dataimage)
-            console.log(JSON.stringify(dataimage));
-
             $.ajax({
                 url:"{{route('storeImage')}}",
                 type:"POST",
@@ -97,13 +95,10 @@
                 processData: false,
                 data:form,
                 headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-                success:function(response)
+                success:function(data)
                 {
-                    console.log(response)
-                    if(response.status == 200)
-                    {
-                        window.location.replace('result');
-                    }
+					console.log(data)
+					window.location.replace('result');
                 }
             })
         })

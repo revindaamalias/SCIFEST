@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Storage;
 use DB;
@@ -51,49 +52,47 @@ class WebcamController extends Controller
             $image_type = $image_type_aux[1];
 
             $image_base64 = base64_decode($image_parts[1]);
-            $fileName = date("YmdHis") . '.png';
+            $fileName = date("YmdHis") . '.jpg';
 
             $file = $folderPath . $fileName;
             Storage::disk('local')->put($file, $image_base64);
-            $saveImage = DB::connection('mysql_scikemitraan')->table('tb_foto')->insert([
-                'gambar' => $file,
-                'base64' => $img,
-                'name' => date("d F Y").$fileName,
-                'created_at' => date("Y-m-d h:i:s")
+            // $saveImage = DB::connection('mysql_scikemitraan')->table('tb_foto')->insert([
+            //     'gambar' => $file,
+            //     'base64' => $img,
+            //     'name' => date("d F Y").$fileName,
+            //     'created_at' => date("Y-m-d h:i:s")
+            // ]);
+
+            // tambahan starts here
+            $host = "192.168.100.84:5000/processImg";
+            $datas = [
+                'filename' => $file,
+                'rawImg' => explode(',',$request->image)[1],
+            ];
+            
+            $client = new Client();
+            $response = $client->post($host, [
+                'json' => $datas
             ]);
+            
+            if ($response->getStatusCode() === 200){
+                $body = json_decode($response->getBody(), true);
+                $image_data_processed = base64_decode($body['rawImgProcessed']);
+                $fileNameProcessed = date("YmdHis") . '_result.jpg';
+                $fileNameProcessed = $folderPath . $fileName;
+                Storage::disk('local')->put($fileNameProcessed, $image_data_processed);
 
-
-            if($saveImage){
-                // $pyathonCommand = escapeshellcmd('');
-                // $pythonShell = shell_exec(escapeshellcmd("C:/Users/hanan/Documents/Work/Sucofindo/SCIFest/FlaskWebServer/pywebserver.py"));
-                // echo $pythonShell;
-                // $process = new Process(['C:/Users/hanan/AppData/Local/Programs/Python/Python311/python.exe', 'C:/Users/hanan/Documents/Work/Sucofindo/SCIFest/FlaskWebServer/pywebserver.py']);
-                $process= Process::fromShellCommandline(['py', '/Documents/GitHub/SCIFEST/FlaskWebServer/py_newfile.py']);
-                $process->run();
-
-                if (!$process->isSuccessful()) {
-                    throw new ProcessFailedException($process);
-                }
-                // $command = escapeshellcmd('C:/Users/hanan/Documents/Work/Sucofindo/SCIFest/FlaskWebServer/pywebserver.py');
-                // $output = shell_exec($command);
-                // echo $process;
-
-                // $output = exec('py C:/Users/User/Documents/GitHub/SCIFEST/FlaskWebServer/py_newfile.py');
-
-                echo $process;
-                exit();
-                return response()->json([
-                    'status'=>200,
-                    'message'=>'Image saved successfully'
-                ],200);
-            }else{
-                return response()->json([
-                    'status'=>500,
-                    'message'=>'Something Warong'
-                ],500);
+                DB::connection('mysql_scikemitraan')->table('tb_foto')->insert([
+                    'gambar' => $fileNameProcessed,
+                    'base64' => $body['rawImgProcessed'],
+                    'name' => date("d F Y") . '_'.$body['msg'].'_'.$fileName,
+                    'created_at' => date("Y-m-d h:i:s")
+                ]);
+                // return response()->json(json_decode($response->getBody(), true));
+                return response()->json(['message' => 'process success']);
             }
+            // if($saveImage){
+            // }
         }
-        // return redirect()->to('/result')->with(['message'=>'Image saved successfully']);
-
     }
 }
