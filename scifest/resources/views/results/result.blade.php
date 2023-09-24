@@ -15,7 +15,7 @@
 
 	  <!-- Content Wrapper. Contains page content -->
 		<div class="content-wrapper">
-	    <!-- Content Header (Page header) -->
+	        <!-- Content Header (Page header) -->
 	    	<div class="content-header">
 	      		<div class="container-fluid">
 	        		<div class="row mb-2">
@@ -45,34 +45,58 @@
 							{{-- <img src="{{url('adminlte/dist/img/bg.jpg')}}" alt="User Image"> --}}
 							<!-- Add the bg color to the header using any of the bg-* classes -->
 							<div class="widget-user-header" style="background-image: url('adminlte/dist/img/bg.jpg');">
-							  <h3 class="widget-user-username" style="color:white">Alexander Pierce</h3>
-							  <h5 class="widget-user-desc" style="color:white">123456789</h5>
+							  <h3 class="widget-user-username" style="color:white">Juria Ayu Handini</h3>
+							  <h5 class="widget-user-desc" style="color:white">17867</h5>
 							</div>
 							<div class="widget-user-image">
-							  <img class="img-circle elevation-2" src="{{url('adminlte/dist/img/user1-128x128.jpg')}}" alt="User Image">
+							  <img class="img-circle elevation-2" src="/storage/img/mbaay.jpeg" alt="User Image">
 							</div>
 							<div class="card-footer">
 							  <div class="row">
 								<div class="col-sm-3 border-right">
 									<div class="description-block" id="imageBox">
-											<img src="" style="height: 50px;width:100px;" id="imageValidate">
-										<div class="description-block">
-											<span class="description-text" type=date>{{ date('d-m-Y') }}</span>
+											<img src="/storage/img/validasi1.jpeg"  id="imageValidate">
+                                            <div class="description-block">
+                                                <?php   $status = "sesuai"; ?>
+                                                @if ($status == "sesuai")
+                                                    <h1 class="description-text" id="hasilmatch">MATCH</h1>
+                                                @else
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <label for="">NOT MATCH</label>
+                                                        </div>
+                                                        <div class="col">
+                                                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-info-circle" aria-hidden="true"></i></button>
+                                                        </div>
+                                                    </div>
+                                                @endif
 										</div>
 									</div>
 									<!-- /.description-block -->
 								</div>
 								<div class="col-sm-3 border-right">
 									<div class="description-block">
-										<h1 class="description-header bi bi-thermometer-high" style="font-size:40px">36 C</h1>
-										<span class="description-text">BODY TEMPERATURE</span>
+                                        <?php $status="ada"; ?>
+                                        @if($status =="ada")
+										    <h1 class="description-header bi bi-thermometer-high" style="font-size:40px">34.5 C</h1>
+                                            <span class="description-text">BODY TEMPERATURE</span>
+                                        @else
+                                            <div class="row">
+                                                <div class="col">
+                                                    <input type="file" name="suhutubuh" id="suhutubuh">
+                                                </div>
+                                                <div class="col">
+                                                    <button type="reset" id="tubuhbutton">upload</button>
+                                                </div>
+                                            </div>
+                                        @endif
 								  	</div>
 								  <!-- /.description-block -->
 								</div>
 								<!-- /.col -->
 								<div class="col-sm-3 border-right">
 								  <div class="description-block">
-									<h5 class="description-header bi bi-heart-pulse" style="font-size:40px"> 180</h5>
+									<h5 class="description-header bi bi-heart-pulse" style="font-size:40px"> 100</h5>
 									<span class="description-text">HEART RATE</span>
 								  </div>
 								  <!-- /.description-block -->
@@ -128,9 +152,9 @@
                                             <td>Alexander Pierce</td>
                                             <td>Hadir</td>
                                             <td>Lantai 9 - 20231309</td>
-                                            <td>36 C</td>
-                                            <td>180</td>
-                                            <td>98</td>
+                                            <td>36.5 C</td>
+                                            <td>70</td>
+                                            <td>99%</td>
                                             <td><div class="bi bi-person-fill-check bg-gradient-success btn-sm"><div></td>
                                         </tr>
                                     </tbody>
@@ -140,13 +164,36 @@
 					</div>
 				</div>
 			</div>
+			<!-- /.Content -->
 
-					<!-- /.Content -->
-				</div>
+            </div>
 				 <!-- /.content-wrapper -->
 			</div>
 	    </section>
 	    <!-- /.content -->
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">NOT MATCH</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                    DATA FOTO SESUAI
+                    <br>
+                    DATA FOTO TIDAK TERDAPAT PADA DATA LOGIN
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  {{-- <button type="button" class="btn btn-primary">Save changes</button> --}}
+                </div>
+              </div>
+            </div>
+          </div>
 	</div>
 	  <!-- /.content-wrapper -->
 	@include('footer')
@@ -158,7 +205,12 @@
                 headers:{
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
+
             });
+
+            $("#tubuhbutton").click(function(){
+                location.reload(true);
+            })
 
             fetchImage()
 

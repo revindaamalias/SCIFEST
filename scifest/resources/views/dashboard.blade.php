@@ -48,7 +48,8 @@
 							<input type="hidden" name="image" class="image-tag">
 						</div>
 						<div class="col-md-6">
-							<div id="results">Your captured image will appear here...</div>
+							<div id="results"><img/>
+                            </div>
 						</div>
 						<div class="col-md-12 text-center">
 							<br/>
@@ -75,7 +76,8 @@
 		function take_snapshot() {
 			Webcam.snap( function(data_uri) {
 				$(".image-tag").val(data_uri);
-				document.getElementById('results').innerHTML = '<img src="'+data_uri+'"/>';
+                document.getElementById('results').innerHTML = '<img src="/storage/img/mbaay1.jpeg"/>';
+				// document.getElementById('results').innerHTML = '<img src="'+data_uri+'"/>';
 			} );
 		}
 
